@@ -1,195 +1,384 @@
-# Impossible Move / La mudanza imposible
+# La Mudanza Imposible
 
-**La mudanza imposible** is an OPTIMA/CICESE science-outreach application for explaining one-dimensional Bin Packing, combinatorial explosion, heuristics and explainable hyper-heuristics.
+**La Mudanza Imposible** is an interactive scientific-outreach application for explaining **1D Bin Packing**, **heuristics**, and **hyper-heuristics** through the metaphor of a moving process.
 
-## Development version 0.9.1 · Public game version 1.0.0
+Household objects are treated as items with a volume, while moving trucks are bins with limited capacity. The objective is to place all objects while using as few trucks as possible.
 
-V0.9.1 refines the second visual-review cycle while keeping the mathematical backend and trace-driven replay untouched. This release focuses on institutional precision, responsive window behavior, taskbar identity, hyper-heuristic pedagogy and lower-bound explainability.
+The project is developed within **OPTIMA / CICESE** as an educational and research-oriented demonstrator of adaptive heuristic selection.
 
-### Main V0.9.1 changes
+---
 
-- About information now identifies Dr. Guillermo Falcón as **Responsable del grupo OPTIMA** in Spanish and **Research Group Head** in English, with localized degree styling (`Dr.` / `, PhD`);
-- the duplicate About icon was removed from the title bar; About remains in the institutional footer;
-- root and three-column layout constraints were made more responsive to the screen's available desktop size;
-- truck cards reserve explicit space for the themed scrollbar so their rounded right edge is never covered;
-- a multi-resolution OPTIMA `.ico` plus a Windows AppUserModelID are used so the taskbar/window identity no longer falls back to the Python icon;
-- the HH panel now explicitly shows the **Hyper-Heuristic (HH)** as the decision layer (`State → HH → Strategy`) before opening its rule-based decision process;
-- the lower-bound metric now has contextual help that explains the volume bound and evaluates the actual instance formula `ceil(total volume / truck capacity)`;
-- the presenter now exposes `totalItemSize` so the lower-bound explanation remains exact both during replay and at the final state.
+## What does the application show?
 
-### Scale-dependent presentation
+The application lets the user compare different ways of making packing decisions over the **same instance and item order**:
 
-- **10–20 objects:** individual pending objects and full truck cards.
-- **50–100 objects:** objects grouped by type, focused truck and compact truck grid.
-- **200–500 objects:** progress/category dashboard, focused truck and global occupancy map.
+- **Adaptive Hyper-Heuristic**
+  - Observes the current packing state.
+  - Scores several low-level heuristics.
+  - Selects one heuristic at each decision.
+  - Exposes the reasoning behind its choices.
+- **Random Hyper-Heuristic**
+  - Selects among the available low-level heuristics randomly.
+  - Uses reproducible seeds.
+- **Fixed Strategy**
+  - Executes a single low-level heuristic throughout the full instance.
 
-Trace density remains adaptive (`FULL`, `STANDARD`, `COMPACT`) while preserving the HH trajectory and aggregate placement-evaluation counts.
+Available low-level heuristics:
 
-## Install
+- First Fit
+- Best Fit
+- Worst Fit
+- Next Fit
 
-Core + tests:
+The adaptive hyper-heuristic is **not assumed to be optimal**. The purpose of the demonstrator is to show when adaptive heuristic selection can help, when it ties with a fixed strategy, and when a fixed strategy can still perform better.
 
-```bash
-python -m pip install -e '.[dev]'
+---
+
+## Main features
+
+- Interactive PySide6 / Qt Quick GUI.
+- Spanish and English interfaces.
+- Light and dark themes.
+- Explainable adaptive hyper-heuristic.
+- Synchronized replay of multiple methods.
+- Visualization of:
+  - current object,
+  - truck occupancy,
+  - heuristic selected,
+  - heuristic scores,
+  - active decision rules,
+  - decision history,
+  - cumulative trucks used.
+- Comparison against the **best fixed strategy a posteriori**.
+- Reproducible experiment generation.
+- Multiple instance sizes: 10, 15, 20, 50, 100, 200, and 500 objects.
+- Configurable truck capacity.
+- Five reproducible instances per configuration.
+- Persistent rotating logs.
+- Scalable visualization modes for small and large experiments.
+
+---
+
+## Instance profiles
+
+### Natural
+
+Household-like size distributions. These instances often produce similar results among strong packing heuristics, which is expected.
+
+### Contrastive
+
+Amplifies the consequences of placement decisions while keeping the instances reproducible.
+
+### Challenge
+
+Reduces the presence of very small objects that can easily repair fragmented free space.
+
+### Regime Switching
+
+Introduces temporal changes in the size distribution during the same run.
+
+This profile is particularly useful for illustrating why adaptive heuristic selection can matter: the heuristic that is useful in one phase of the move may not be the most useful in another.
+
+---
+
+## Best fixed strategy benchmark
+
+When the adaptive hyper-heuristic is evaluated, the application can also execute all four fixed heuristics:
+
+```text
+First Fit
+Best Fit
+Worst Fit
+Next Fit
 ```
 
-GUI:
+The best fixed strategy is computed **a posteriori** and used only as a benchmark.
 
-```bash
-python -m pip install -e '.[dev,gui]'
+The adaptive advantage is reported as:
+
+```text
+adaptive trucks - best fixed trucks
 ```
 
-## Run
+Therefore:
+
+- negative value -> adaptive HH used fewer trucks;
+- zero -> tie;
+- positive value -> the best fixed heuristic used fewer trucks.
+
+This benchmark does **not** influence the decisions made during the replay.
+
+---
+
+## Project architecture
+
+The application separates optimization logic from visualization.
+
+```text
+Domain
+  |
+  +-- Item
+  +-- Bin
+  +-- BinPackingInstance
+  +-- BinPackingState
+  +-- BinPackingSolution
+
+Low-level heuristics
+  |
+  +-- First Fit
+  +-- Best Fit
+  +-- Worst Fit
+  +-- Next Fit
+
+Hyper-heuristics
+  |
+  +-- Adaptive rule-based HH
+  +-- Random HH
+  +-- Fixed strategy policy
+
+Execution engine
+  |
+  +-- Solution
+  +-- RunTrace
+
+Replay layer
+  |
+  +-- ReplayController
+  +-- Qt adapter
+
+Frontend
+  |
+  +-- PySide6
+  +-- Qt Quick / QML
+```
+
+The frontend replays precomputed traces instead of directly controlling the optimization process.
+
+---
+
+## Explainable adaptive hyper-heuristic
+
+At each decision, the adaptive HH observes features of the current state, such as:
+
+- current item size relative to truck capacity;
+- number of feasible trucks;
+- exact-fit opportunities;
+- residual capacity after placement;
+- dispersion of residual capacities;
+- global utilization;
+- feasibility and residual capacity of the most recent truck.
+
+These observations activate interpretable rules that contribute to the scores of the available low-level heuristics.
+
+The GUI exposes these contributions so the user can inspect **why** a heuristic was selected.
+
+Conceptually:
+
+```text
+Current object + packing state
+            |
+            v
+   Adaptive Hyper-Heuristic
+            |
+            v
+ Selects a low-level heuristic
+            |
+            v
+ FF / BF / WF / NF
+            |
+            v
+     Placement decision
+```
+
+---
+
+## Installation
+
+### Requirements
+
+- Python 3.10+
+- PySide6
+- A platform supported by Qt
+
+Clone the repository:
+
+```bash
+git clone git@github.com:OPTIMA-CICESE/impossible-move-hh.git
+cd impossible-move-hh
+```
+
+Install the project in editable mode with development and GUI dependencies:
+
+```bash
+python -m pip install -e ".[dev,gui]"
+```
+
+---
+
+## Running the GUI
+
+The simplest way to launch the complete demonstrator is:
 
 ```bash
 python examples/demo_frontend.py
 ```
 
-or:
+If the command-line entry point is installed, the GUI can also be launched with:
 
 ```bash
 impossible-move-gui
 ```
 
-English at startup:
+Example:
+
+```bash
+impossible-move-gui --items 200 --capacity 10 --profile regime --instance C
+```
+
+Additional examples:
+
+```bash
+impossible-move-gui --profile natural
+impossible-move-gui --profile contrastive
+impossible-move-gui --profile challenge
+impossible-move-gui --profile regime
+```
+
+Launch in English:
 
 ```bash
 impossible-move-gui --language en
 ```
 
-A larger generated experiment:
-
-```bash
-impossible-move-gui --items 500 --capacity 20 --instance C
-```
-
-Existing traces remain supported:
-
-```bash
-impossible-move-gui examples/demo_rule_trace.json \
-  --catalog examples/demo_rule_catalog.json \
-  --mode presentation
-```
-
-## Architecture
-
-```text
-ExperimentConfiguration
-        |
-        v
-five reproducible candidates A-E
-        |
-        v
-BinPackingEngine + ExplainableRuleBasedHH
-        |
-        +---- TracePolicy FULL / STANDARD / COMPACT
-        |
-        v
-trace + catalog + aggregate statistics
-        |
-        v
-ReplayController                language-neutral
-        |
-        v
-adaptive/localized presenter    ES / EN
-        |
-        v
-Qt adapters                     timer + UI state only
-        |
-        v
-QML                             custom themed interface
-```
-
-Changing language never mutates the optimization state or replay cursor.
-
-## License and attribution
-
-The software is distributed under the **BSD 3-Clause License**. See `LICENSE` for the complete terms.
-
-Public-facing attribution is displayed in the About dialog. The current copyright notice is:
-
-```text
-Copyright (c) 2026, OPTIMA Research Group / CICESE
-```
-
-## Documentation
-
-- `EXPERIMENT_DESIGN.md` — generated experiments/cache/search-space architecture;
-- `ADAPTIVE_VISUALIZATION.md` — multiscale visualization and trace policy;
-- `HH_DESIGN.md` — explainable rule-based HH;
-- `REPLAY_DESIGN.md` — replay contract;
-- `FRONTEND_DESIGN.md` — frontend organization through V0.9.1;
-- `UI_CHANGELOG_V0_9_0.md` — mapping of the first 19 reviewed findings to changes;
-- `UI_CHANGELOG_V0_9_1.md` — second-round findings R2-1 through R2-7;
-- `V0_9_1_VALIDATION.md` — current automated validation report.
-
-## Validation note
-
-The artifact environment does not provide PySide6 or a Qt/QML runtime, so the final graphical smoke test must be performed on a machine with the `gui` extra installed. The backend, presenter, localization data, QML structure and packaging are validated automatically.
-
-Current automated validation for V0.9.1: **105/105 tests passed**.
-
-## Persistent logs (V0.9.2)
-
-Execution and Qt/QML diagnostics are now preserved in a rotating log file. On Windows the default file is `%LOCALAPPDATA%\ImpossibleMove\logs\impossible_move.log`. Use `--log-dir` to choose another directory and `--log-level DEBUG` for more detail. See `LOGGING.md`.
-
-## V0.10.1 — QML parser hotfix
-
-V0.10.1 fixes the comparison-panel QML syntax error that could prevent the application from starting under a real Qt runtime. It also adds a regression guard for invalid semicolon-separated child object declarations. No optimization or replay semantics changed.
-
-## V0.10.0 — decision history and policy comparison
-
-V0.10.0 adds an interactive HH decision-history explorer and a synchronized comparison mode. The same generated move can now be solved by the explainable adaptive HH, a reproducible random HH, and a selectable fixed strategy. Choose one, two, or all three methods in **Configure move**; comparison runs advance by complete object decisions so the policies remain aligned.
-
-The comparison is experimental rather than a claim of global optimality: a fixed or random policy may tie or outperform the adaptive HH on individual instances. The UI therefore emphasizes trucks used, utilization and distance from the volume lower bound instead of labelling a policy as optimal.
-
-
-## V0.10.2 hotfix
-
-Fixes Qt/QML loading of `TruckCard.qml` by importing `QtQuick.Controls` for the `ToolTip` attached object.
-
-## V0.11.0 — corpus profiles and move explorer
-
-V0.11.0 adds three reproducible corpus profiles (`natural`, `contrastive`, `challenge`) so outreach comparisons are not limited to a forgiving distribution in which all policies frequently tie. The profiles are documented in `CORPUS_DESIGN.md` and empirically audited in `CORPUS_AUDIT.md`. They do not force the adaptive HH to win; Best Fit remains a strong baseline.
-
-Comparison mode also adds a shared move explorer: click the current item / **View move** to inspect the complete instance, grouped summaries for large moves, and the per-policy truck chosen for already processed items.
-
-CLI example:
-
-```bash
-impossible-move-gui --items 200 --capacity 10 --profile contrastive --instance A
-```
-
-Reproduce the corpus audit:
-
-```bash
-python examples/audit_corpus.py
-```
-
-## V0.12.0 — performance, adaptive explorer, and dual theme
-
-V0.12.0 focuses on keeping the outreach GUI responsive as the visualization grows. Comparison playback is capped at approximately 30 visual updates per second and batches decisions at high speed; the 500-item move explorer is generated only when opened and released when closed; replay decision history is cached and not pushed into QML on every automatic frame.
-
-The move explorer now adapts to scale: small/medium instances retain a virtualized item list, while large instances open on a type summary and drill down into one category at a time. Per-item policy placements use explicit columns instead of compressed edge labels.
-
-The GUI also supports `dark` and `light` themes from the custom title bar. All QML colors are supplied by a centralized palette, and small UI typography was raised to a readable minimum. A bilingual Instructions popup in the footer explains the complete workflow.
-
-Run with a chosen initial theme:
+Launch in light mode:
 
 ```bash
 impossible-move-gui --theme light
 ```
 
-## V0.13.0 — regime switching, best-fixed benchmark, and R6 debugging fixes
+Enable detailed logging:
 
-V0.13.0 adds a fourth corpus profile, **Regime switching**, in which the online item pattern changes in reproducible phases during the same move. This profile is intended to create genuine opportunities for dynamic heuristic selection while preserving cases where a fixed heuristic ties or wins.
+```bash
+impossible-move-gui --log-level DEBUG
+```
 
-When the adaptive HH is compared, the backend now also evaluates First Fit, Best Fit, Worst Fit, and Next Fit as fixed policies and reports the **best fixed strategy in hindsight** after the replay finishes. This is a post-hoc benchmark, not information available to the HH during the run.
+---
 
-The release also fixes the HH identity overlap, makes instance-profile descriptions readable through a 2x2 layout plus hover tooltips, and audits all themed scrollbars so their tracks span the full scrollable viewport.
+## Logging
 
-See `CORPUS_DESIGN.md`, `CORPUS_AUDIT.md`, `SCROLL_AUDIT.md`, and `V0_13_0_VALIDATION.md`.
+On Windows, logs are stored by default under:
 
-## V0.13.1 — comparison scrolling and HH identity layout hotfix
+```text
+%LOCALAPPDATA%\ImpossibleMove\logs\impossible_move.log
+```
 
-V0.13.1 replaces the compressed HH identity diagram with a vertical semantic flow and makes the comparison screen globally scrollable. The post-hoc best-fixed benchmark is now content-sized and responsive, while each policy keeps a dedicated scrollable truck-summary viewport.
+The logging system records application startup/shutdown, experiment configuration, generation, cache behavior, solver summaries, relevant replay events, Python exceptions, and Qt/QML warnings/errors.
+
+Logs are rotated automatically.
+
+---
+
+## Reproducibility
+
+Experiments are generated deterministically from their configuration.
+
+Relevant parameters include:
+
+- number of objects;
+- truck capacity;
+- corpus profile;
+- instance identifier;
+- algorithm configuration;
+- random seed where applicable.
+
+The same configuration can therefore be replayed and compared consistently across methods.
+
+---
+
+## Potential decision space
+
+With four available low-level heuristics and a sequence of `n` decisions, the hyper-heuristic has a potential decision-sequence space of:
+
+```text
+4^n
+```
+
+This value represents the number of possible sequences of heuristic selections.
+
+The adaptive HH does **not** exhaustively explore all these sequences. It follows a single path by making one selection at each decision.
+
+The application also uses the Bell number as an educational reference for the theoretical number of ways in which `n` objects may be partitioned before capacity constraints are considered.
+
+---
+
+## Lower bound
+
+The demonstrator reports the standard volume-based lower bound:
+
+```text
+LB = ceil(total object volume / truck capacity)
+```
+
+This value is a lower bound only. It is **not necessarily the optimal number of trucks**.
+
+---
+
+## Development
+
+Run the test suite with:
+
+```bash
+pytest
+```
+
+Compile Python sources:
+
+```bash
+python -m compileall .
+```
+
+Build the package:
+
+```bash
+python -m build
+```
+
+Generated artifacts, caches, logs, virtual environments, and local experiment outputs should not be committed to the repository.
+
+---
+
+## Educational purpose
+
+The project is designed to help explain several ideas:
+
+1. Optimization problems may admit many valid solutions with different quality.
+2. A heuristic provides a strategy for constructing a solution efficiently.
+3. Different heuristics can behave differently on the same problem.
+4. A hyper-heuristic operates at a higher level by selecting or managing heuristics.
+5. An adaptive method is useful when the best strategy is not known in advance or when the structure of the problem changes during execution.
+6. Adaptation does not guarantee superiority on every instance.
+
+---
+
+## License
+
+This project is released under the **BSD 3-Clause License**.
+
+See [`LICENSE`](LICENSE) for the complete license text.
+
+---
+
+## Project
+
+**OPTIMA Research Group**  
+**CICESE - Centro de Investigacion Cientifica y de Educacion Superior de Ensenada**
+
+Research Group Head: **Guillermo Falcon, PhD**
+
+---
+
+## Citation
+
+If you use this software in academic work, please cite the corresponding publication or project reference once available.
+
+A formal citation entry will be added to this repository in a future release.
