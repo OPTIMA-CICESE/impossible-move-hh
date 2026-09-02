@@ -1,0 +1,1299 @@
+{
+  "schema_version": "1.2",
+  "run_id": "rule-demo-run-001",
+  "events": [
+    {
+      "sequence": 0,
+      "step": 0,
+      "timestamp_ns": 1788221969801613485,
+      "run_id": "rule-demo-run-001",
+      "instance_id": "mudanza_rule_demo_01",
+      "hyper_heuristic_id": "explainable_rule_based",
+      "heuristic_ids": [
+        "first_fit",
+        "best_fit",
+        "worst_fit",
+        "next_fit"
+      ],
+      "item_order": [
+        "sofa",
+        "clothes",
+        "bed",
+        "tv",
+        "chair",
+        "books",
+        "fridge",
+        "plant",
+        "desk",
+        "lamp"
+      ],
+      "trace_policy": "full",
+      "type": "RunStarted"
+    },
+    {
+      "sequence": 1,
+      "step": 0,
+      "timestamp_ns": 1788221969801651051,
+      "item_id": "sofa",
+      "size": 8,
+      "remaining_items": 9,
+      "type": "ItemSelected"
+    },
+    {
+      "sequence": 2,
+      "step": 0,
+      "timestamp_ns": 1788221969801685713,
+      "features": {
+        "open_bins": 0.0,
+        "current_item_size": 8.0,
+        "item_ratio": 0.8,
+        "remaining_items": 9.0,
+        "mean_remaining_capacity": 0.0,
+        "max_remaining_capacity": 0.0,
+        "utilization": 0.0,
+        "feasible_bins": 0.0,
+        "feasible_ratio": 0.0,
+        "exact_fit_bins": 0.0,
+        "min_remaining_after": 0.0,
+        "max_remaining_after": 0.0,
+        "residual_spread": 0.0,
+        "last_bin_feasible": 0.0,
+        "last_bin_remaining_after": 0.0
+      },
+      "type": "StateObserved"
+    },
+    {
+      "sequence": 3,
+      "step": 0,
+      "timestamp_ns": 1788221969801749798,
+      "heuristic_id": "first_fit",
+      "scores": {
+        "first_fit": 5.0,
+        "best_fit": 3.0,
+        "worst_fit": 0.35,
+        "next_fit": 0.2
+      },
+      "reasons": [
+        {
+          "rule_id": "base",
+          "heuristic_id": "first_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "best_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "worst_fit",
+          "contribution": 0.35
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "next_fit",
+          "contribution": 0.2
+        },
+        {
+          "rule_id": "no_existing_fit",
+          "heuristic_id": "first_fit",
+          "contribution": 4.0
+        },
+        {
+          "rule_id": "large_item",
+          "heuristic_id": "best_fit",
+          "contribution": 2.0
+        }
+      ],
+      "type": "HeuristicSelected"
+    },
+    {
+      "sequence": 4,
+      "step": 0,
+      "timestamp_ns": 1788221969801778902,
+      "bin_id": null,
+      "create_new_bin": true,
+      "type": "PlacementSelected"
+    },
+    {
+      "sequence": 5,
+      "step": 0,
+      "timestamp_ns": 1788221969801807314,
+      "bin_id": 0,
+      "capacity": 10,
+      "type": "BinCreated"
+    },
+    {
+      "sequence": 6,
+      "step": 0,
+      "timestamp_ns": 1788221969801828796,
+      "item_id": "sofa",
+      "bin_id": 0,
+      "used_capacity": 8,
+      "remaining_capacity": 2,
+      "type": "ItemPlaced"
+    },
+    {
+      "sequence": 7,
+      "step": 1,
+      "timestamp_ns": 1788221969801844860,
+      "item_id": "clothes",
+      "size": 2,
+      "remaining_items": 8,
+      "type": "ItemSelected"
+    },
+    {
+      "sequence": 8,
+      "step": 1,
+      "timestamp_ns": 1788221969801874234,
+      "features": {
+        "open_bins": 1.0,
+        "current_item_size": 2.0,
+        "item_ratio": 0.2,
+        "remaining_items": 8.0,
+        "mean_remaining_capacity": 2.0,
+        "max_remaining_capacity": 2.0,
+        "utilization": 0.8,
+        "feasible_bins": 1.0,
+        "feasible_ratio": 1.0,
+        "exact_fit_bins": 1.0,
+        "min_remaining_after": 0.0,
+        "max_remaining_after": 0.0,
+        "residual_spread": 0.0,
+        "last_bin_feasible": 1.0,
+        "last_bin_remaining_after": 0.0
+      },
+      "type": "StateObserved"
+    },
+    {
+      "sequence": 9,
+      "step": 1,
+      "timestamp_ns": 1788221969801911600,
+      "heuristic_id": "best_fit",
+      "scores": {
+        "first_fit": 2.5,
+        "best_fit": 5.5,
+        "worst_fit": 0.35,
+        "next_fit": 2.7
+      },
+      "reasons": [
+        {
+          "rule_id": "base",
+          "heuristic_id": "first_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "best_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "worst_fit",
+          "contribution": 0.35
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "next_fit",
+          "contribution": 0.2
+        },
+        {
+          "rule_id": "exact_fit",
+          "heuristic_id": "best_fit",
+          "contribution": 4.0
+        },
+        {
+          "rule_id": "single_feasible_bin",
+          "heuristic_id": "first_fit",
+          "contribution": 1.5
+        },
+        {
+          "rule_id": "single_feasible_bin",
+          "heuristic_id": "best_fit",
+          "contribution": 0.5
+        },
+        {
+          "rule_id": "tight_last_bin",
+          "heuristic_id": "next_fit",
+          "contribution": 2.5
+        }
+      ],
+      "type": "HeuristicSelected"
+    },
+    {
+      "sequence": 10,
+      "step": 1,
+      "timestamp_ns": 1788221969801937568,
+      "bin_id": 0,
+      "feasible": true,
+      "remaining_before": 2,
+      "remaining_after": 0,
+      "score": 0.0,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 11,
+      "step": 1,
+      "timestamp_ns": 1788221969801948775,
+      "bin_id": 0,
+      "create_new_bin": false,
+      "type": "PlacementSelected"
+    },
+    {
+      "sequence": 12,
+      "step": 1,
+      "timestamp_ns": 1788221969801962926,
+      "item_id": "clothes",
+      "bin_id": 0,
+      "used_capacity": 10,
+      "remaining_capacity": 0,
+      "type": "ItemPlaced"
+    },
+    {
+      "sequence": 13,
+      "step": 2,
+      "timestamp_ns": 1788221969801973372,
+      "item_id": "bed",
+      "size": 6,
+      "remaining_items": 7,
+      "type": "ItemSelected"
+    },
+    {
+      "sequence": 14,
+      "step": 2,
+      "timestamp_ns": 1788221969801991809,
+      "features": {
+        "open_bins": 1.0,
+        "current_item_size": 6.0,
+        "item_ratio": 0.6,
+        "remaining_items": 7.0,
+        "mean_remaining_capacity": 0.0,
+        "max_remaining_capacity": 0.0,
+        "utilization": 1.0,
+        "feasible_bins": 0.0,
+        "feasible_ratio": 0.0,
+        "exact_fit_bins": 0.0,
+        "min_remaining_after": 0.0,
+        "max_remaining_after": 0.0,
+        "residual_spread": 0.0,
+        "last_bin_feasible": 0.0,
+        "last_bin_remaining_after": 0.0
+      },
+      "type": "StateObserved"
+    },
+    {
+      "sequence": 15,
+      "step": 2,
+      "timestamp_ns": 1788221969802017828,
+      "heuristic_id": "first_fit",
+      "scores": {
+        "first_fit": 5.0,
+        "best_fit": 3.0,
+        "worst_fit": 0.35,
+        "next_fit": 0.2
+      },
+      "reasons": [
+        {
+          "rule_id": "base",
+          "heuristic_id": "first_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "best_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "worst_fit",
+          "contribution": 0.35
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "next_fit",
+          "contribution": 0.2
+        },
+        {
+          "rule_id": "no_existing_fit",
+          "heuristic_id": "first_fit",
+          "contribution": 4.0
+        },
+        {
+          "rule_id": "large_item",
+          "heuristic_id": "best_fit",
+          "contribution": 2.0
+        }
+      ],
+      "type": "HeuristicSelected"
+    },
+    {
+      "sequence": 16,
+      "step": 2,
+      "timestamp_ns": 1788221969802033341,
+      "bin_id": 0,
+      "feasible": false,
+      "remaining_before": 0,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 17,
+      "step": 2,
+      "timestamp_ns": 1788221969802038759,
+      "bin_id": null,
+      "create_new_bin": true,
+      "type": "PlacementSelected"
+    },
+    {
+      "sequence": 18,
+      "step": 2,
+      "timestamp_ns": 1788221969802050617,
+      "bin_id": 1,
+      "capacity": 10,
+      "type": "BinCreated"
+    },
+    {
+      "sequence": 19,
+      "step": 2,
+      "timestamp_ns": 1788221969802061353,
+      "item_id": "bed",
+      "bin_id": 1,
+      "used_capacity": 6,
+      "remaining_capacity": 4,
+      "type": "ItemPlaced"
+    },
+    {
+      "sequence": 20,
+      "step": 3,
+      "timestamp_ns": 1788221969802071408,
+      "item_id": "tv",
+      "size": 4,
+      "remaining_items": 6,
+      "type": "ItemSelected"
+    },
+    {
+      "sequence": 21,
+      "step": 3,
+      "timestamp_ns": 1788221969802090546,
+      "features": {
+        "open_bins": 2.0,
+        "current_item_size": 4.0,
+        "item_ratio": 0.4,
+        "remaining_items": 6.0,
+        "mean_remaining_capacity": 2.0,
+        "max_remaining_capacity": 4.0,
+        "utilization": 0.8,
+        "feasible_bins": 1.0,
+        "feasible_ratio": 0.5,
+        "exact_fit_bins": 1.0,
+        "min_remaining_after": 0.0,
+        "max_remaining_after": 0.0,
+        "residual_spread": 0.0,
+        "last_bin_feasible": 1.0,
+        "last_bin_remaining_after": 0.0
+      },
+      "type": "StateObserved"
+    },
+    {
+      "sequence": 22,
+      "step": 3,
+      "timestamp_ns": 1788221969802117516,
+      "heuristic_id": "best_fit",
+      "scores": {
+        "first_fit": 3.25,
+        "best_fit": 5.5,
+        "worst_fit": 0.35,
+        "next_fit": 2.7
+      },
+      "reasons": [
+        {
+          "rule_id": "base",
+          "heuristic_id": "first_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "best_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "worst_fit",
+          "contribution": 0.35
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "next_fit",
+          "contribution": 0.2
+        },
+        {
+          "rule_id": "exact_fit",
+          "heuristic_id": "best_fit",
+          "contribution": 4.0
+        },
+        {
+          "rule_id": "single_feasible_bin",
+          "heuristic_id": "first_fit",
+          "contribution": 1.5
+        },
+        {
+          "rule_id": "single_feasible_bin",
+          "heuristic_id": "best_fit",
+          "contribution": 0.5
+        },
+        {
+          "rule_id": "medium_item",
+          "heuristic_id": "first_fit",
+          "contribution": 0.75
+        },
+        {
+          "rule_id": "tight_last_bin",
+          "heuristic_id": "next_fit",
+          "contribution": 2.5
+        }
+      ],
+      "type": "HeuristicSelected"
+    },
+    {
+      "sequence": 23,
+      "step": 3,
+      "timestamp_ns": 1788221969802135563,
+      "bin_id": 0,
+      "feasible": false,
+      "remaining_before": 0,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 24,
+      "step": 3,
+      "timestamp_ns": 1788221969802140901,
+      "bin_id": 1,
+      "feasible": true,
+      "remaining_before": 4,
+      "remaining_after": 0,
+      "score": 0.0,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 25,
+      "step": 3,
+      "timestamp_ns": 1788221969802146470,
+      "bin_id": 1,
+      "create_new_bin": false,
+      "type": "PlacementSelected"
+    },
+    {
+      "sequence": 26,
+      "step": 3,
+      "timestamp_ns": 1788221969802158447,
+      "item_id": "tv",
+      "bin_id": 1,
+      "used_capacity": 10,
+      "remaining_capacity": 0,
+      "type": "ItemPlaced"
+    },
+    {
+      "sequence": 27,
+      "step": 4,
+      "timestamp_ns": 1788221969802168452,
+      "item_id": "chair",
+      "size": 3,
+      "remaining_items": 5,
+      "type": "ItemSelected"
+    },
+    {
+      "sequence": 28,
+      "step": 4,
+      "timestamp_ns": 1788221969802187010,
+      "features": {
+        "open_bins": 2.0,
+        "current_item_size": 3.0,
+        "item_ratio": 0.3,
+        "remaining_items": 5.0,
+        "mean_remaining_capacity": 0.0,
+        "max_remaining_capacity": 0.0,
+        "utilization": 1.0,
+        "feasible_bins": 0.0,
+        "feasible_ratio": 0.0,
+        "exact_fit_bins": 0.0,
+        "min_remaining_after": 0.0,
+        "max_remaining_after": 0.0,
+        "residual_spread": 0.0,
+        "last_bin_feasible": 0.0,
+        "last_bin_remaining_after": 0.0
+      },
+      "type": "StateObserved"
+    },
+    {
+      "sequence": 29,
+      "step": 4,
+      "timestamp_ns": 1788221969802210255,
+      "heuristic_id": "first_fit",
+      "scores": {
+        "first_fit": 5.0,
+        "best_fit": 1.0,
+        "worst_fit": 0.35,
+        "next_fit": 0.2
+      },
+      "reasons": [
+        {
+          "rule_id": "base",
+          "heuristic_id": "first_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "best_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "worst_fit",
+          "contribution": 0.35
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "next_fit",
+          "contribution": 0.2
+        },
+        {
+          "rule_id": "no_existing_fit",
+          "heuristic_id": "first_fit",
+          "contribution": 4.0
+        }
+      ],
+      "type": "HeuristicSelected"
+    },
+    {
+      "sequence": 30,
+      "step": 4,
+      "timestamp_ns": 1788221969802224967,
+      "bin_id": 0,
+      "feasible": false,
+      "remaining_before": 0,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 31,
+      "step": 4,
+      "timestamp_ns": 1788221969802229503,
+      "bin_id": 1,
+      "feasible": false,
+      "remaining_before": 0,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 32,
+      "step": 4,
+      "timestamp_ns": 1788221969802233690,
+      "bin_id": null,
+      "create_new_bin": true,
+      "type": "PlacementSelected"
+    },
+    {
+      "sequence": 33,
+      "step": 4,
+      "timestamp_ns": 1788221969802244536,
+      "bin_id": 2,
+      "capacity": 10,
+      "type": "BinCreated"
+    },
+    {
+      "sequence": 34,
+      "step": 4,
+      "timestamp_ns": 1788221969802254661,
+      "item_id": "chair",
+      "bin_id": 2,
+      "used_capacity": 3,
+      "remaining_capacity": 7,
+      "type": "ItemPlaced"
+    },
+    {
+      "sequence": 35,
+      "step": 5,
+      "timestamp_ns": 1788221969802264365,
+      "item_id": "books",
+      "size": 3,
+      "remaining_items": 4,
+      "type": "ItemSelected"
+    },
+    {
+      "sequence": 36,
+      "step": 5,
+      "timestamp_ns": 1788221969802283844,
+      "features": {
+        "open_bins": 3.0,
+        "current_item_size": 3.0,
+        "item_ratio": 0.3,
+        "remaining_items": 4.0,
+        "mean_remaining_capacity": 2.3333333333333335,
+        "max_remaining_capacity": 7.0,
+        "utilization": 0.7666666666666667,
+        "feasible_bins": 1.0,
+        "feasible_ratio": 0.3333333333333333,
+        "exact_fit_bins": 0.0,
+        "min_remaining_after": 4.0,
+        "max_remaining_after": 4.0,
+        "residual_spread": 0.0,
+        "last_bin_feasible": 1.0,
+        "last_bin_remaining_after": 4.0
+      },
+      "type": "StateObserved"
+    },
+    {
+      "sequence": 37,
+      "step": 5,
+      "timestamp_ns": 1788221969802307209,
+      "heuristic_id": "first_fit",
+      "scores": {
+        "first_fit": 2.5,
+        "best_fit": 1.5,
+        "worst_fit": 0.35,
+        "next_fit": 0.2
+      },
+      "reasons": [
+        {
+          "rule_id": "base",
+          "heuristic_id": "first_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "best_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "worst_fit",
+          "contribution": 0.35
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "next_fit",
+          "contribution": 0.2
+        },
+        {
+          "rule_id": "single_feasible_bin",
+          "heuristic_id": "first_fit",
+          "contribution": 1.5
+        },
+        {
+          "rule_id": "single_feasible_bin",
+          "heuristic_id": "best_fit",
+          "contribution": 0.5
+        }
+      ],
+      "type": "HeuristicSelected"
+    },
+    {
+      "sequence": 38,
+      "step": 5,
+      "timestamp_ns": 1788221969802322822,
+      "bin_id": 0,
+      "feasible": false,
+      "remaining_before": 0,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 39,
+      "step": 5,
+      "timestamp_ns": 1788221969802327089,
+      "bin_id": 1,
+      "feasible": false,
+      "remaining_before": 0,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 40,
+      "step": 5,
+      "timestamp_ns": 1788221969802330744,
+      "bin_id": 2,
+      "feasible": true,
+      "remaining_before": 7,
+      "remaining_after": 4,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 41,
+      "step": 5,
+      "timestamp_ns": 1788221969802335571,
+      "bin_id": 2,
+      "create_new_bin": false,
+      "type": "PlacementSelected"
+    },
+    {
+      "sequence": 42,
+      "step": 5,
+      "timestamp_ns": 1788221969802346448,
+      "item_id": "books",
+      "bin_id": 2,
+      "used_capacity": 6,
+      "remaining_capacity": 4,
+      "type": "ItemPlaced"
+    },
+    {
+      "sequence": 43,
+      "step": 6,
+      "timestamp_ns": 1788221969802356052,
+      "item_id": "fridge",
+      "size": 7,
+      "remaining_items": 3,
+      "type": "ItemSelected"
+    },
+    {
+      "sequence": 44,
+      "step": 6,
+      "timestamp_ns": 1788221969802374820,
+      "features": {
+        "open_bins": 3.0,
+        "current_item_size": 7.0,
+        "item_ratio": 0.7,
+        "remaining_items": 3.0,
+        "mean_remaining_capacity": 1.3333333333333333,
+        "max_remaining_capacity": 4.0,
+        "utilization": 0.8666666666666667,
+        "feasible_bins": 0.0,
+        "feasible_ratio": 0.0,
+        "exact_fit_bins": 0.0,
+        "min_remaining_after": 0.0,
+        "max_remaining_after": 0.0,
+        "residual_spread": 0.0,
+        "last_bin_feasible": 0.0,
+        "last_bin_remaining_after": 0.0
+      },
+      "type": "StateObserved"
+    },
+    {
+      "sequence": 45,
+      "step": 6,
+      "timestamp_ns": 1788221969802396342,
+      "heuristic_id": "first_fit",
+      "scores": {
+        "first_fit": 5.0,
+        "best_fit": 3.0,
+        "worst_fit": 0.35,
+        "next_fit": 0.2
+      },
+      "reasons": [
+        {
+          "rule_id": "base",
+          "heuristic_id": "first_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "best_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "worst_fit",
+          "contribution": 0.35
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "next_fit",
+          "contribution": 0.2
+        },
+        {
+          "rule_id": "no_existing_fit",
+          "heuristic_id": "first_fit",
+          "contribution": 4.0
+        },
+        {
+          "rule_id": "large_item",
+          "heuristic_id": "best_fit",
+          "contribution": 2.0
+        }
+      ],
+      "type": "HeuristicSelected"
+    },
+    {
+      "sequence": 46,
+      "step": 6,
+      "timestamp_ns": 1788221969802410213,
+      "bin_id": 0,
+      "feasible": false,
+      "remaining_before": 0,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 47,
+      "step": 6,
+      "timestamp_ns": 1788221969802414159,
+      "bin_id": 1,
+      "feasible": false,
+      "remaining_before": 0,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 48,
+      "step": 6,
+      "timestamp_ns": 1788221969802418225,
+      "bin_id": 2,
+      "feasible": false,
+      "remaining_before": 4,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 49,
+      "step": 6,
+      "timestamp_ns": 1788221969802422241,
+      "bin_id": null,
+      "create_new_bin": true,
+      "type": "PlacementSelected"
+    },
+    {
+      "sequence": 50,
+      "step": 6,
+      "timestamp_ns": 1788221969802432877,
+      "bin_id": 3,
+      "capacity": 10,
+      "type": "BinCreated"
+    },
+    {
+      "sequence": 51,
+      "step": 6,
+      "timestamp_ns": 1788221969802442942,
+      "item_id": "fridge",
+      "bin_id": 3,
+      "used_capacity": 7,
+      "remaining_capacity": 3,
+      "type": "ItemPlaced"
+    },
+    {
+      "sequence": 52,
+      "step": 7,
+      "timestamp_ns": 1788221969802474288,
+      "item_id": "plant",
+      "size": 1,
+      "remaining_items": 2,
+      "type": "ItemSelected"
+    },
+    {
+      "sequence": 53,
+      "step": 7,
+      "timestamp_ns": 1788221969802496071,
+      "features": {
+        "open_bins": 4.0,
+        "current_item_size": 1.0,
+        "item_ratio": 0.1,
+        "remaining_items": 2.0,
+        "mean_remaining_capacity": 1.75,
+        "max_remaining_capacity": 4.0,
+        "utilization": 0.825,
+        "feasible_bins": 2.0,
+        "feasible_ratio": 0.5,
+        "exact_fit_bins": 0.0,
+        "min_remaining_after": 2.0,
+        "max_remaining_after": 3.0,
+        "residual_spread": 0.1,
+        "last_bin_feasible": 1.0,
+        "last_bin_remaining_after": 2.0
+      },
+      "type": "StateObserved"
+    },
+    {
+      "sequence": 54,
+      "step": 7,
+      "timestamp_ns": 1788221969802519616,
+      "heuristic_id": "next_fit",
+      "scores": {
+        "first_fit": 1.0,
+        "best_fit": 1.0,
+        "worst_fit": 1.6,
+        "next_fit": 2.7
+      },
+      "reasons": [
+        {
+          "rule_id": "base",
+          "heuristic_id": "first_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "best_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "worst_fit",
+          "contribution": 0.35
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "next_fit",
+          "contribution": 0.2
+        },
+        {
+          "rule_id": "small_item_many_options",
+          "heuristic_id": "worst_fit",
+          "contribution": 1.25
+        },
+        {
+          "rule_id": "tight_last_bin",
+          "heuristic_id": "next_fit",
+          "contribution": 2.5
+        }
+      ],
+      "type": "HeuristicSelected"
+    },
+    {
+      "sequence": 55,
+      "step": 7,
+      "timestamp_ns": 1788221969802531974,
+      "bin_id": 3,
+      "feasible": true,
+      "remaining_before": 3,
+      "remaining_after": 2,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 56,
+      "step": 7,
+      "timestamp_ns": 1788221969802536821,
+      "bin_id": 3,
+      "create_new_bin": false,
+      "type": "PlacementSelected"
+    },
+    {
+      "sequence": 57,
+      "step": 7,
+      "timestamp_ns": 1788221969802547698,
+      "item_id": "plant",
+      "bin_id": 3,
+      "used_capacity": 8,
+      "remaining_capacity": 2,
+      "type": "ItemPlaced"
+    },
+    {
+      "sequence": 58,
+      "step": 8,
+      "timestamp_ns": 1788221969802557562,
+      "item_id": "desk",
+      "size": 5,
+      "remaining_items": 1,
+      "type": "ItemSelected"
+    },
+    {
+      "sequence": 59,
+      "step": 8,
+      "timestamp_ns": 1788221969802577502,
+      "features": {
+        "open_bins": 4.0,
+        "current_item_size": 5.0,
+        "item_ratio": 0.5,
+        "remaining_items": 1.0,
+        "mean_remaining_capacity": 1.5,
+        "max_remaining_capacity": 4.0,
+        "utilization": 0.85,
+        "feasible_bins": 0.0,
+        "feasible_ratio": 0.0,
+        "exact_fit_bins": 0.0,
+        "min_remaining_after": 0.0,
+        "max_remaining_after": 0.0,
+        "residual_spread": 0.0,
+        "last_bin_feasible": 0.0,
+        "last_bin_remaining_after": 0.0
+      },
+      "type": "StateObserved"
+    },
+    {
+      "sequence": 60,
+      "step": 8,
+      "timestamp_ns": 1788221969802598333,
+      "heuristic_id": "first_fit",
+      "scores": {
+        "first_fit": 5.75,
+        "best_fit": 1.0,
+        "worst_fit": 0.35,
+        "next_fit": 0.2
+      },
+      "reasons": [
+        {
+          "rule_id": "base",
+          "heuristic_id": "first_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "best_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "worst_fit",
+          "contribution": 0.35
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "next_fit",
+          "contribution": 0.2
+        },
+        {
+          "rule_id": "no_existing_fit",
+          "heuristic_id": "first_fit",
+          "contribution": 4.0
+        },
+        {
+          "rule_id": "medium_item",
+          "heuristic_id": "first_fit",
+          "contribution": 0.75
+        }
+      ],
+      "type": "HeuristicSelected"
+    },
+    {
+      "sequence": 61,
+      "step": 8,
+      "timestamp_ns": 1788221969802614006,
+      "bin_id": 0,
+      "feasible": false,
+      "remaining_before": 0,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 62,
+      "step": 8,
+      "timestamp_ns": 1788221969802618213,
+      "bin_id": 1,
+      "feasible": false,
+      "remaining_before": 0,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 63,
+      "step": 8,
+      "timestamp_ns": 1788221969802621988,
+      "bin_id": 2,
+      "feasible": false,
+      "remaining_before": 4,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 64,
+      "step": 8,
+      "timestamp_ns": 1788221969802625544,
+      "bin_id": 3,
+      "feasible": false,
+      "remaining_before": 2,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 65,
+      "step": 8,
+      "timestamp_ns": 1788221969802629269,
+      "bin_id": null,
+      "create_new_bin": true,
+      "type": "PlacementSelected"
+    },
+    {
+      "sequence": 66,
+      "step": 8,
+      "timestamp_ns": 1788221969802639965,
+      "bin_id": 4,
+      "capacity": 10,
+      "type": "BinCreated"
+    },
+    {
+      "sequence": 67,
+      "step": 8,
+      "timestamp_ns": 1788221969802650811,
+      "item_id": "desk",
+      "bin_id": 4,
+      "used_capacity": 5,
+      "remaining_capacity": 5,
+      "type": "ItemPlaced"
+    },
+    {
+      "sequence": 68,
+      "step": 9,
+      "timestamp_ns": 1788221969802661137,
+      "item_id": "lamp",
+      "size": 2,
+      "remaining_items": 0,
+      "type": "ItemSelected"
+    },
+    {
+      "sequence": 69,
+      "step": 9,
+      "timestamp_ns": 1788221969802684682,
+      "features": {
+        "open_bins": 5.0,
+        "current_item_size": 2.0,
+        "item_ratio": 0.2,
+        "remaining_items": 0.0,
+        "mean_remaining_capacity": 2.2,
+        "max_remaining_capacity": 5.0,
+        "utilization": 0.78,
+        "feasible_bins": 3.0,
+        "feasible_ratio": 0.6,
+        "exact_fit_bins": 1.0,
+        "min_remaining_after": 0.0,
+        "max_remaining_after": 3.0,
+        "residual_spread": 0.3,
+        "last_bin_feasible": 1.0,
+        "last_bin_remaining_after": 3.0
+      },
+      "type": "StateObserved"
+    },
+    {
+      "sequence": 70,
+      "step": 9,
+      "timestamp_ns": 1788221969802710751,
+      "heuristic_id": "best_fit",
+      "scores": {
+        "first_fit": 1.0,
+        "best_fit": 5.0,
+        "worst_fit": 1.6,
+        "next_fit": 0.2
+      },
+      "reasons": [
+        {
+          "rule_id": "base",
+          "heuristic_id": "first_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "best_fit",
+          "contribution": 1.0
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "worst_fit",
+          "contribution": 0.35
+        },
+        {
+          "rule_id": "base",
+          "heuristic_id": "next_fit",
+          "contribution": 0.2
+        },
+        {
+          "rule_id": "exact_fit",
+          "heuristic_id": "best_fit",
+          "contribution": 4.0
+        },
+        {
+          "rule_id": "small_item_many_options",
+          "heuristic_id": "worst_fit",
+          "contribution": 1.25
+        }
+      ],
+      "type": "HeuristicSelected"
+    },
+    {
+      "sequence": 71,
+      "step": 9,
+      "timestamp_ns": 1788221969802731341,
+      "bin_id": 0,
+      "feasible": false,
+      "remaining_before": 0,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 72,
+      "step": 9,
+      "timestamp_ns": 1788221969802736970,
+      "bin_id": 1,
+      "feasible": false,
+      "remaining_before": 0,
+      "remaining_after": null,
+      "score": null,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 73,
+      "step": 9,
+      "timestamp_ns": 1788221969802740545,
+      "bin_id": 2,
+      "feasible": true,
+      "remaining_before": 4,
+      "remaining_after": 2,
+      "score": 2.0,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 74,
+      "step": 9,
+      "timestamp_ns": 1788221969802744411,
+      "bin_id": 3,
+      "feasible": true,
+      "remaining_before": 2,
+      "remaining_after": 0,
+      "score": 0.0,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 75,
+      "step": 9,
+      "timestamp_ns": 1788221969802747846,
+      "bin_id": 4,
+      "feasible": true,
+      "remaining_before": 5,
+      "remaining_after": 3,
+      "score": 3.0,
+      "type": "PlacementEvaluated"
+    },
+    {
+      "sequence": 76,
+      "step": 9,
+      "timestamp_ns": 1788221969802752233,
+      "bin_id": 3,
+      "create_new_bin": false,
+      "type": "PlacementSelected"
+    },
+    {
+      "sequence": 77,
+      "step": 9,
+      "timestamp_ns": 1788221969802764911,
+      "item_id": "lamp",
+      "bin_id": 3,
+      "used_capacity": 10,
+      "remaining_capacity": 0,
+      "type": "ItemPlaced"
+    },
+    {
+      "sequence": 78,
+      "step": 10,
+      "timestamp_ns": 1788221969802830008,
+      "bins_used": 5,
+      "total_capacity": 50,
+      "used_capacity": 41,
+      "unused_capacity": 9,
+      "utilization": 0.82,
+      "lower_bound": 5,
+      "placement_evaluations": 22,
+      "type": "RunFinished"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+[console_scripts]
+impossible-move-gui = impossible_move.frontend.app:main

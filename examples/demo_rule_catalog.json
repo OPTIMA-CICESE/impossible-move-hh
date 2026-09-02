@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.1",
+  "instance_id": "mudanza_rule_demo_01",
+  "bin_capacity": 10,
+  "items": [
+    {
+      "id": "sofa",
+      "display_name": "Sofá",
+      "size": 8,
+      "category": "furniture",
+      "asset_id": "sofa"
+    },
+    {
+      "id": "clothes",
+      "display_name": "Caja de ropa",
+      "size": 2,
+      "category": "box",
+      "asset_id": "clothes_box"
+    },
+    {
+      "id": "bed",
+      "display_name": "Cama",
+      "size": 6,
+      "category": "furniture",
+      "asset_id": "bed"
+    },
+    {
+      "id": "tv",
+      "display_name": "Televisión",
+      "size": 4,
+      "category": "electronics",
+      "asset_id": "tv"
+    },
+    {
+      "id": "chair",
+      "display_name": "Silla",
+      "size": 3,
+      "category": "furniture",
+      "asset_id": "chair"
+    },
+    {
+      "id": "books",
+      "display_name": "Caja de libros",
+      "size": 3,
+      "category": "box",
+      "asset_id": "books_box"
+    },
+    {
+      "id": "fridge",
+      "display_name": "Refrigerador",
+      "size": 7,
+      "category": "appliance",
+      "asset_id": "fridge"
+    },
+    {
+      "id": "plant",
+      "display_name": "Planta",
+      "size": 1,
+      "category": "decoration",
+      "asset_id": "plant"
+    },
+    {
+      "id": "desk",
+      "display_name": "Escritorio",
+      "size": 5,
+      "category": "furniture",
+      "asset_id": "desk"
+    },
+    {
+      "id": "lamp",
+      "display_name": "Lámpara",
+      "size": 2,
+      "category": "decoration",
+      "asset_id": "lamp"
+    }
+  ]
+}

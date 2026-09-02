@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "impossible-move"
+version = "0.13.1"
+description = "Adaptive multi-scale bin-packing outreach laboratory with explainable hyper-heuristic replay."
+requires-python = ">=3.11"
+authors = [{name = "Ricardo Desales"}]
+dependencies = []
+license = {file = "LICENSE"}
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+gui = ["PySide6>=6.8,<7"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+impossible-move-gui = "impossible_move.frontend.app:main"
+
+[tool.setuptools.package-data]
+"impossible_move.frontend" = ["qml/*.qml", "qml/components/*.qml", "qml/assets/*.svg", "qml/assets/objects/*.svg", "qml/assets/branding/*.png", "qml/assets/branding/*.ico"]
